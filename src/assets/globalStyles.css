@@ -11,13 +11,33 @@ html {
 
 html, body {
   height: 100%;
+  overflow: hidden;
+
 }
 
 
 #app {
   height: 100%;
-  background-color: hsl(0, 0%, 15%);
-  color: #fff;
+  background-image: url("../assets/back-img.png");
+  object-fit: cover;
+  color: #fff; 
 }
 
+
+
+button:focus, a:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
+button:focus-visible, a:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline-offset: 3px;
+  outline-style: dotted;
+  outline-width: 2px;
+  outline-color: #fff;
+}
+
+input {
+  font-size: 1rem;
+  font-family: inherit;
+}
 
