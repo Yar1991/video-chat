@@ -6,6 +6,8 @@ export const useStore = defineStore("chatState", () => {
   const peerTwoData = ref({});
   const peerConnection = ref(null);
   const openChat = ref(false);
+  const messages = ref([]);
+  const isMobile = ref(null);
 
-  return { status, peerTwoData, peerConnection, openChat };
+  return { status, peerTwoData, peerConnection, openChat, messages, isMobile };
 });

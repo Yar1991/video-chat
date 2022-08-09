@@ -7,6 +7,9 @@ import {
   getDoc,
   onSnapshot,
   deleteDoc,
+  getDocs,
+  query,
+  orderBy,
 } from "firebase/firestore";
 import { useStore } from "./store";
 import { v4 as newId } from "uuid";
@@ -72,8 +75,13 @@ export async function addToRoom(username, roomId) {
 
 export async function removeFromRoom(roomId, peerId, peerTwoId) {
   const room = doc(db, `rooms/${roomId}`);
+  const messages = collection(db, `rooms/${roomId}/messages`);
+  const messagesData = await getDocs(messages);
   const roomData = await getDoc(room);
   if (Object.keys(roomData.data().users).length == 1) {
+    messagesData.forEach(async (message) => {
+      await deleteDoc(doc(db, `rooms/${roomId}/messages/${message.id}`));
+    });
     await deleteDoc(room);
     return;
   }
@@ -107,5 +115,26 @@ export async function statusUpdate(roomId, peerId) {
     } else {
       return;
     }
+  });
+}
+
+export async function addMessage(roomId, message) {
+  const messages = collection(db, `rooms/${roomId}/messages`);
+  const newMessage = doc(messages);
+  await setDoc(newMessage, {
+    ...message,
+  });
+}
+
+export function updateMessages(roomId) {
+  const chatState = useStore();
+  const messages = collection(db, `rooms/${roomId}/messages`);
+  const messagesQuery = query(messages, orderBy("timestamp"));
+  return onSnapshot(messagesQuery, async (snapshot) => {
+    let updated = [];
+    snapshot.forEach((doc) => {
+      if (!updated.includes(doc.data())) updated.push(doc.data());
+    });
+    chatState.messages = [...updated];
   });
 }

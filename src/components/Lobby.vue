@@ -125,9 +125,13 @@ onBeforeUnmount(() => {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 2rem;
+    padding: 2rem 3rem;
     display: flex;
     align-items: center;
+
+    @media (min-width: 1900px) {
+      padding: 2rem 5rem;
+    }
 
 
     .logo {
@@ -208,7 +212,7 @@ onBeforeUnmount(() => {
     background-color: hsl(170, 24%, 44%);
     padding: 2.5rem;
     border-radius: 0.7rem;
-    box-shadow: 0 0 15px hsla(0, 0%, 10%, 0.4), 0 5px 25px hsla(0, 0%, 5%, 0.4);
+    box-shadow: 0 0 15px hsla(0, 0%, 10%, 0.4), 0 5px 25px hsla(0, 0%, 0%, 0.4);
     will-change: transform;
     animation: anim-lobby-form 0.7s ease-out both;
 

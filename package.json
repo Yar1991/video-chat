@@ -6,11 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:env": "env-cmd -f .env npm run build"
   },
   "dependencies": {
+    "@vueuse/core": "^9.1.0",
     "firebase": "^9.9.0",
     "peerjs": "^1.4.6",
+    "picmo": "^5.4.1",
     "pinia": "^2.0.16",
     "uuid": "^8.3.2",
     "vue": "^3.2.37",
@@ -18,6 +21,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",
+    "env-cmd": "^10.1.0",
     "vite": "^3.0.0"
   }
 }
