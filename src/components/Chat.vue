@@ -13,7 +13,9 @@ const showEmoji = ref(false);
 const roomId = ref(router.currentRoute.value.params.roomId);
 const messageUpdateWatcher = ref(null);
 const scrollChatTimeout = ref(null);
+const scrollChatWatcher = ref(null);
 const chatOpenWatcher = ref(null);
+
 
 
 function sendMessage(e) {
@@ -28,13 +30,6 @@ function sendMessage(e) {
     timestamp
   }
   addMessage(roomId.value, message);
-  scrollChatTimeout.value = setTimeout(() => {
-    messagesContainer.value.scroll({
-      top: messagesContainer.value.scrollHeight + 300,
-      left: 0,
-      behavior: "smooth"
-    });
-  }, 300);
   inputRef.value.textContent = "";
   showEmoji.value = false;
 }
@@ -49,6 +44,16 @@ chatOpenWatcher.value = watch(() => chatState.openChat, () => {
       });
     }, 300);
   }
+});
+
+scrollChatWatcher.value = watch(() => chatState.messages, () => {
+  scrollChatTimeout.value = setTimeout(() => {
+    messagesContainer.value.scroll({
+      top: messagesContainer.value.scrollHeight + 300,
+      left: 0,
+      behavior: "smooth"
+    });
+  }, 300);
 })
 
 
@@ -68,6 +73,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  scrollChatWatcher.value();
   messageUpdateWatcher.value();
   chatOpenWatcher.value();
   clearTimeout(scrollChatTimeout.value);
