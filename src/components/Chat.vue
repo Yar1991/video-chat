@@ -21,12 +21,12 @@ const chatOpenWatcher = ref(null);
 function sendMessage(e) {
   e.preventDefault();
   if (inputRef.value.textContent === "") return;
-  const currentTime = new Date().toLocaleTimeString().split(" ");
+  const currentTime = new Date().toTimeString().split(" ");
   const timestamp = new Date().getTime();
   const message = {
     name: localStorage.getItem("peerName"),
     text: inputRef.value.textContent,
-    time: `${currentTime[0].split(":")[0]}:${currentTime[0].split(":")[1]} ${currentTime[1]}`,
+    time: `${currentTime[0].split(":")[0]}:${currentTime[0].split(":")[1]}`,
     timestamp
   }
   addMessage(roomId.value, message);
@@ -36,6 +36,7 @@ function sendMessage(e) {
 
 chatOpenWatcher.value = watch(() => chatState.openChat, () => {
   if (chatState.openChat) {
+    inputRef.value.focus();
     scrollChatTimeout.value = setTimeout(() => {
       messagesContainer.value.scroll({
         top: messagesContainer.value.scrollHeight + 300,
@@ -152,11 +153,16 @@ onBeforeUnmount(() => {
   clip-path: circle(0% at 120% 120%);
   transition: opacity 0.5s ease-out, clip-path 0.5s ease-out;
 
+  @media (min-width: 500px) {
+    width: 70%;
+    height: 80%;
+  }
+
   @media (min-width: 1024px) {
     bottom: 3rem;
     right: 3rem;
     width: 27rem;
-    height: 70vh;
+    height: 80vh;
   }
 
   &.active {
@@ -233,7 +239,7 @@ onBeforeUnmount(() => {
 
         h4 {
           font-weight: 500;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           opacity: 0.7;
 
           &::selection {

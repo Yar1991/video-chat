@@ -335,6 +335,12 @@ onUnmounted(() => {
       &.one {
         animation: fade-video-one 0.7s ease-out both;
         transform-origin: center top;
+        align-self: center;
+
+
+        @media (min-height: 1000px) {
+          height: 70%;
+        }
 
         @keyframes fade-video-one {
           from {
@@ -389,17 +395,17 @@ onUnmounted(() => {
         background-color: hsla(170, 24%, 44%, 0.4);
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
-        padding: 0.5rem 1rem;
+        padding: 0.3rem 0.7rem;
         border-radius: 0.7rem;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 500;
         color: #fff;
 
         @media (max-width: 500px) {
-          bottom: 0.5rem;
-          left: 0.5rem;
-          padding: 0.5rem;
-          font-size: 1rem;
+          bottom: 0.1rem;
+          left: 0.1rem;
+          padding: 0.2rem 0.5rem;
+          font-size: 0.9rem;
         }
       }
 
@@ -415,6 +421,13 @@ onUnmounted(() => {
       align-items: center;
       gap: 3rem;
       will-change: transform;
+
+      @media (max-width: 1000px) {
+        bottom: 1rem;
+        flex-direction: column;
+        left: 90%;
+        gap: 1.5rem;
+      }
 
       @media (min-width: 1024px) {
         animation: anim-controls 0.7s ease-out both;
@@ -439,10 +452,15 @@ onUnmounted(() => {
         border: none;
         border-radius: 50%;
         padding: 1rem;
-        filter: drop-shadow(0 5px 5px rgba(23, 23, 23, 0.6));
+        filter: drop-shadow(0 5px 5px rgba(23, 23, 23, 0.6)) drop-shadow(0 0 15px rgba(23, 23, 23, 0.4));
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
         will-change: transform;
+
+        @media (max-width: 500px) {
+          width: 4rem;
+          height: 4rem;
+        }
 
         &:hover {
           background-color: hsl(170, 24%, 54%);
@@ -457,7 +475,7 @@ onUnmounted(() => {
         &.toggle-controls {
           display: none;
 
-          @media (max-width: 500px) {
+          @media (max-width: 1000px) {
             display: inline-block;
           }
         }
@@ -475,12 +493,7 @@ onUnmounted(() => {
 
 
 
-      @media (max-width: 600px) {
-        bottom: 1rem;
-        flex-direction: column;
-        left: 90%;
-        gap: 2rem;
-      }
+
     }
   }
 }
