@@ -178,11 +178,11 @@ onUnmounted(() => {
     <div class="videos">
       <div class="video-box one">
         <video ref="peerOneVideoElement" class="peer-one" autoplay playsinline></video>
-        <span>{{ !peerTwoStream ? peerOneName : peerTwoName }}</span>
+        <span v-if="!chatState.isMobile">{{ !peerTwoStream ? peerOneName : peerTwoName }}</span>
       </div>
       <div v-if="peerTwoName" class="video-box two">
         <video ref="peerTwoVideoElement" class="peer-two" autoplay playsinline></video>
-        <span v-if="peerTwoStream">{{ peerTwoStream && peerOneName }}</span>
+        <span v-if="peerTwoStream && !chatState.isMobile">{{ peerTwoStream && peerOneName }}</span>
       </div>
       <div ref="controlBtns" class="controls">
         <button :class="chatState.isMobile ? 'camera-btn toggle' : 'camera-btn'" @click="cameraControl"
@@ -390,23 +390,16 @@ onUnmounted(() => {
       span {
         display: inline-block;
         position: absolute;
-        bottom: 1rem;
-        left: 1rem;
+        bottom: 0.5rem;
+        left: 0.5rem;
         background-color: hsla(170, 24%, 44%, 0.4);
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
-        padding: 0.3rem 0.7rem;
+        padding: 0.5rem 1rem;
         border-radius: 0.7rem;
         font-size: 1rem;
         font-weight: 500;
         color: #fff;
-
-        @media (max-width: 500px) {
-          bottom: 0.1rem;
-          left: 0.1rem;
-          padding: 0.2rem 0.5rem;
-          font-size: 0.9rem;
-        }
       }
 
 
